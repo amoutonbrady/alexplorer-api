@@ -5,10 +5,7 @@ import {
 	UploadedFile,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import * as Papa from 'papaparse';
-
 import { Open } from 'unzipper';
-import { AppService } from './app.service';
 
 const filter = [
 	'agency.txt',
@@ -31,8 +28,6 @@ type UploadedFile = {
 
 @Controller()
 export class AppController {
-	constructor(private readonly appService: AppService) {}
-
 	@Post('upload')
 	@UseInterceptors(FileInterceptor('gtfs'))
 	async uploadFile(@UploadedFile() gtfs: UploadedFile): Promise<string> {
